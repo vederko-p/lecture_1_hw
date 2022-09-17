@@ -1,0 +1,20 @@
+from pydantic import BaseModel
+
+
+articles_bd = [
+    {'id': 0, 'title': 'Web Applications', 'topic': 'Web'},
+    {'id': 1, 'title': 'IT News', 'topic': 'IT'},
+    {'id': 2, 'title': 'Neural Networks', 'topic': 'NN'},
+    {'id': 3, 'title': 'Deep Learning', 'topic': 'NN'},
+    {'id': 4, 'title': 'Self Driving Cars', 'topic': 'IT'},
+    {'id': 5, 'title': 'Triplet Loss', 'topic': 'NN'},
+    {'id': 6, 'title': 'YOLOv5', 'topic': 'NN'}
+]
+
+
+class Art(BaseModel):
+    """Article model"""
+
+    title: str
+    topic: str
+    published: int | None = None
