@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.articles_base import articles_bd, Art
+from app.topic_model import TopicName
 
 
 router = APIRouter()
@@ -37,3 +38,12 @@ async def add_article(art: Art):
     if art.published is not None:
         article['published'] = art.published
     return article
+
+@router.get('/check_topic/{topic_name}')
+async def check_topic(topic_name: TopicName):
+    if topic_name is TopicName.web:
+        n = len(list(filter(lambda art: art['topic'] == TopicName.web.value, articles_bd)))
+        return {'info': f'There\'s {n} articles of {TopicName.web.value} topic!'}
+    if topic_name.value == 'IT':
+        return {'topic_name': topic_name, 'info': 'I love IT!'}
+    return {'topic_name': topic_name, 'info': 'cNN\'s are cool!'}
