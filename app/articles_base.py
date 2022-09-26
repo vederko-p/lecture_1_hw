@@ -1,6 +1,14 @@
 from pydantic import BaseModel
 
 
+class Art(BaseModel):
+    """Article model"""
+
+    title: str
+    topic: str
+    published: int | None = None
+
+
 class ArticlesDB:
     content = [
         {'id': 0, 'title': 'Web Applications', 'topic': 'Web'},
@@ -13,10 +21,5 @@ class ArticlesDB:
     len = len(content)
     max_size = 9
 
-
-class Art(BaseModel):
-    """Article model"""
-
-    title: str
-    topic: str
-    published: int | None = None
+    def add_art(self, new_art: Art):
+        self.content.append(new_art)
