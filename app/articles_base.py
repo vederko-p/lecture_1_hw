@@ -19,7 +19,7 @@ class ArticlesDB:
         {'id': 5, 'title': 'Triplet Loss', 'topic': 'NN'},
         {'id': 6, 'title': 'YOLOv5', 'topic': 'NN'}]
     len = len(content)
-    max_size = 9
+    max_size = 8
 
     def add_art(self, new_art: Art):
         self.content.append(new_art)
