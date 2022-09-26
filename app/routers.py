@@ -3,6 +3,8 @@ from fastapi import APIRouter
 from app.articles_base import ArticlesDB, Art
 from app.topic_model import TopicName
 
+from utils import check_bd_free_space
+
 
 router = APIRouter()
 articles_bd = ArticlesDB()
@@ -39,8 +41,11 @@ async def add_article(art: Art):
     article = art.dict()
     if art.published is not None:
         article['published'] = art.published
-    articles_bd.add_art(article)
-    text = 'Article was successfully published!'
+    if check_bd_free_space(articles_bd):
+        articles_bd.add_art(article)
+        text = 'Article was successfully published!'
+    else:
+        text = 'There\'s no free space for new article..'
     return text
 
 @router.get('/check_topic/{topic_name}')
