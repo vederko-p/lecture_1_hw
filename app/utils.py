@@ -11,4 +11,4 @@ def check_bd_free_space(bd: ArticlesDB) -> bool:
 
 def check_originality(bd: ArticlesDB, art: Art) -> Tuple[float, float]:
     r = random.random()
-    return r > 0.5, r
+    return r > 0.5, round(r, 2)
