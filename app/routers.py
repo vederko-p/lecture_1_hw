@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from app.articles_base import ArticlesDB, Art
 from app.topic_model import TopicName
 
-from utils import check_bd_free_space, check_originality
+from app.utils import check_bd_free_space, check_originality
 
 
 router = APIRouter()
