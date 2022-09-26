@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from app.articles_base import ArticlesDB, Art
 from app.topic_model import TopicName
 
-from utils import check_bd_free_space
+from utils import check_bd_free_space, check_originality
 
 
 router = APIRouter()
@@ -42,8 +42,12 @@ async def add_article(art: Art):
     if art.published is not None:
         article['published'] = art.published
     if check_bd_free_space(articles_bd):
-        articles_bd.add_art(article)
-        text = 'Article was successfully published!'
+        dicision, rate = check_originality(articles_bd, article)
+        if dicision:
+            articles_bd.add_art(article)
+            text = 'Article was successfully published!'
+        else:
+            text = f'Originality of the article is too low: {rate}..'
     else:
         text = 'There\'s no free space for new article..'
     return text
