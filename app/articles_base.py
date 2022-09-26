@@ -23,3 +23,4 @@ class ArticlesDB:
 
     def add_art(self, new_art: Art):
         self.content.append(new_art)
+        self.len += 1
