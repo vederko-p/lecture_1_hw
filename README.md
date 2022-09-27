@@ -1,6 +1,10 @@
 # Application for articles
 
-## 1. Functionality
+## 1. Business cases
+
+Users can view and add articles. When user tries to add article, he must pass originally level. Also the DB has to have free space for new articles.
+
+## 2. Functionality
 
 **View articles**
 
@@ -32,7 +36,7 @@ To add article, visit the following endpoint in docs:
 
 Be attentive, your article must pass originality level. Besides, there may be no space in the database.
 
-## 2. Tests
+## 3. Tests
 
 Package name of the chosen testing module: PyTest.
 
