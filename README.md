@@ -31,3 +31,15 @@ To add article, visit the following endpoint in docs:
     /articles/add
 
 Be attentive, your article must pass originality level. Besides, there may be no space in the database.
+
+## 2. Tests
+
+Package name of the chosen testing module: PyTest.
+
+**How to run tests**
+
+Go into root directory and run the following:
+
+    pytest
+
+It will automatically run all test_*.py files.
