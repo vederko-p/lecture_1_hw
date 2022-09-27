@@ -40,6 +40,4 @@ Package name of the chosen testing module: PyTest.
 
 Go into root directory and run the following:
 
-    pytest
-
-It will automatically run all test_*.py files.
+    pytest tests.py
