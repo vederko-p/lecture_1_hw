@@ -8,7 +8,7 @@ from app.articles_base import ArticlesDB, Art
 def random_error(func):
     def _wrapper(*args, **kwargs):
         error_p = random.random()
-        if error_p > 0.5:
+        if error_p > 0.8:
             return 'error'
         else:
             result = func(*args, **kwargs)
