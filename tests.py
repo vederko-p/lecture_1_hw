@@ -4,8 +4,11 @@ from app.articles_base import ArticlesDB
 
 def test_check_bd():
     articles_bd = ArticlesDB()
-    assert isinstance(check_bd_free_space(articles_bd), bool)
+    res = check_bd_free_space(articles_bd)
+    assert isinstance(res, bool)
 
 
-def test_check_originality():
-    assert isinstance(check_originality(1, 1), tuple)
+def test_check_originality_type():
+    res = check_originality(1, 1)
+    assert isinstance(res, tuple)
+
