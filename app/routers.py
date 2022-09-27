@@ -11,7 +11,7 @@ articles_bd = ArticlesDB()
 
 
 @router.get('/')
-def read_root():
+async def read_root():
     content = [
         'Possible routes:',
         [
@@ -51,6 +51,7 @@ async def add_article(art: Art):
     else:
         text = 'There\'s no free space for new article..'
     return text
+
 
 @router.get('/check_topic/{topic_name}')
 async def check_topic(topic_name: TopicName):
