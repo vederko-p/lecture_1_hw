@@ -7,8 +7,9 @@ from app.articles_base import ArticlesDB, Art
 
 def random_error(func):
     def _wrapper(*args, **kwargs):
+        error_threshold = 1
         error_p = random.random()
-        if error_p > 0.8:
+        if error_p > error_threshold:
             return 'error'
         else:
             result = func(*args, **kwargs)
@@ -22,6 +23,13 @@ def check_bd_free_space(bd: ArticlesDB) -> bool:
 
 
 @random_error
-def check_originality(bd: ArticlesDB, art: Art) -> Tuple[float, float]:
-    r = random.random()
-    return r > 0.5, round(r, 2)
+def check_originality(
+    bd: ArticlesDB, art: Art,
+    custom_rate: float | None = None
+) -> Tuple[float, float]:
+    orig_threshold = 0.5
+    if custom_rate is None:
+        r = random.random()
+    else:
+        r = custom_rate
+    return r > orig_threshold, round(r, 2)
