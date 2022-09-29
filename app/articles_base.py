@@ -38,10 +38,11 @@ class SubscribesDB(DataBaseClass):
     def __init__(self, content: List[dict]):
         super(SubscribesDB, self).__init__(content)
         
-    def check_subscribe_status(self, user_id: int) -> dict:
+    def check_user_subscribe_status(self, user_id: int) -> dict:
         res = self.find_by('user_id', user_id)
-        return res['status']
+        return res[0]['status']
 
-    def extend_subscribe(self, useri_id: int):
+    def extend_subscribe(self, user_id: int):
         res = self.find_by('user_id', user_id)
-        res['status'] = 'Active'
+        res[0]['status'] = 'Active'
+        return 'Subscribe has been extended successfully'

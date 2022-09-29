@@ -33,7 +33,7 @@ async def read_root():
 
 @router.get('/articles')
 async def get_aricles():
-    articles = [art['title'] for art in articles_bd.content]
+    articles = [art['title'] for art in articles_bd.content]  # TODO: Исправить все места со сбором данных из БД (использовать find_by)
     return articles
 
 
@@ -68,3 +68,15 @@ async def check_topic(topic_name: TopicName):
     if topic_name.value == 'IT':
         return {'topic_name': topic_name, 'info': 'I love IT!'}
     return {'topic_name': topic_name, 'info': 'cNN\'s are cool!'}
+
+
+@router.get('/check_subscribe/{user_id}')
+async def get_certain_aricles(user_id: int):
+    user_sub_status = subscribes_bd.check_user_subscribe_status(user_id)
+    return user_sub_status
+
+
+@router.get('/extend_subscribe/{user_id}')
+async def get_certain_aricles(user_id: int):
+    report = subscribes_bd.extend_subscribe(user_id)
+    return report
