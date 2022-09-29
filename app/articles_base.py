@@ -22,6 +22,9 @@ class DataBaseClass:
                 collected.append(cell)
         return collected
 
+    def __len__(self):
+        return len(self.content)
+
 
 class ArticlesDB(DataBaseClass):
     def __init__(self, content: List[dict]):
