@@ -3,6 +3,7 @@ from typing import Tuple
 
 import random
 from app.articles_base import ArticlesDB, Art
+from app.articles_base import SubscribesDB
 
 
 def random_error(func):
@@ -33,3 +34,8 @@ def check_originality(
     else:
         r = custom_rate
     return r > orig_threshold, round(r, 2)
+
+
+def add_random_users(n: int, users_bd: SubscribesDB):
+    for _ in range(n):
+        users_bd.add_user('1', random.randint(100, 1000))
