@@ -51,7 +51,7 @@ class SubscribesDB(DataBaseClass):
         return 'Subscribe has been extended successfully'
 
     def add_user(self, sub_status: str, user_id: int):
-        new_id = self.get_last_id + 1
+        new_id = self.get_last_id() + 1
         new_user = {
             'id': new_id,
             'status': sub_status,
