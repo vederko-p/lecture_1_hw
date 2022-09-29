@@ -1,5 +1,16 @@
 # Application for articles
 
+## Launch instruction
+
+Clone the repository
+
+Install requirements
+
+Execute the following command:
+
+    uvicorn app.main:app
+
+
 ## 1. Business cases
 
 Users can view and add articles. When user tries to add article, he must pass originally level. Also the DB has to have free space for new articles.
