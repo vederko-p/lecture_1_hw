@@ -1,13 +1,20 @@
+
 from fastapi import APIRouter
 
 from app.articles_base import ArticlesDB, Art
+from app.articles_base import SubscribesDB
+
 from app.topic_model import TopicName
 
 from app.utils import check_bd_free_space, check_originality
 
+import app.databases_content as db_cont
+
 
 router = APIRouter()
-articles_bd = ArticlesDB()
+
+articles_bd = ArticlesDB(db_cont.articles_data)
+subscribes_bd = SubscribesDB(db_cont.subscribes_data)
 
 
 @router.get('/')
