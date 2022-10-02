@@ -1,7 +1,4 @@
-import time
-
-from fastapi import FastAPI, Request
-
+from fastapi import FastAPI
 from app.routers import router
 
 
