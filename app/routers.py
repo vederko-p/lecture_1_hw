@@ -30,9 +30,10 @@ async def read_root():
             '/articles/<str art_topic> (Web, IT, NN)',
             '/articles/<str art_topic>?number=<int number>',
             '/articles/add in docs',
-            '/cgeck_topic/{topic_name} in docs',
+            '/check_topic/{topic_name} in docs',
             '/check_subscribe/{user_id}<int number>',
-            '/extend_subscribe/{user_id}<int number>'
+            '/extend_subscribe/{user_id}<int number>',
+            '/check_grpc?n1=<int number>&n2=<int number>'
             ]
         ]
     return content
