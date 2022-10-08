@@ -6,6 +6,10 @@ from app.articles_base import ArticlesDB, SubscribesDB
 
 import app.databases_content as db_cont
 
+import grpc
+import app.grpc_files.basic_pb2 as basic_pb2
+import app.grpc_files.basic_pb2_grpc as basic_pb2_grpc
+
 
 def test_check_bd():
     articles_bd = ArticlesDB(db_cont.articles_data)
@@ -58,3 +62,20 @@ def test_integration_3(var, expectation):
     add_random_users(var, subscribes_bd)
     len_after = len(subscribes_bd)
     assert len_after - len_before == expectation
+
+
+@pytest.mark.parametrize(
+    "var1, var2, expectation",
+    [
+        (1, 1, 2),
+        (2, 2, 4),
+        (2, 3, 5),
+        (4, 3, 7),
+        (6, 5, 11)
+    ])
+def test_integration_grpc(var1, var2, expectation):
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = basic_pb2_grpc.SimpleActionsStub(channel)
+        message = basic_pb2.SumRequest(a=var1, b=var2)
+        response = stub.AddNumbers(message)
+    assert response.c == expectation
