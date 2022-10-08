@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62\x61sic.proto\"\"\n\nSumRequest\x12\t\n\x01\x61\x18\x01 \x01(\x05\x12\t\n\x01\x62\x18\x02 \x01(\x05\"\x15\n\x08SumReply\x12\t\n\x01\x63\x18\x03 \x01(\x05\x32\x35\n\rSimpleActions\x12$\n\x08SayHello\x12\x0b.SumRequest\x1a\t.SumReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62\x61sic.proto\"\"\n\nSumRequest\x12\t\n\x01\x61\x18\x01 \x01(\x05\x12\t\n\x01\x62\x18\x02 \x01(\x05\"\x15\n\x08SumReply\x12\t\n\x01\x63\x18\x03 \x01(\x05\x32\x37\n\rSimpleActions\x12&\n\nAddNumbers\x12\x0b.SumRequest\x1a\t.SumReply\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'basic_pb2', globals())
@@ -25,5 +25,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SUMREPLY._serialized_start=51
   _SUMREPLY._serialized_end=72
   _SIMPLEACTIONS._serialized_start=74
-  _SIMPLEACTIONS._serialized_end=127
+  _SIMPLEACTIONS._serialized_end=129
 # @@protoc_insertion_point(module_scope)

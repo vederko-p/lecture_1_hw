@@ -14,8 +14,8 @@ class SimpleActionsStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.SayHello = channel.unary_unary(
-                '/SimpleActions/SayHello',
+        self.AddNumbers = channel.unary_unary(
+                '/SimpleActions/AddNumbers',
                 request_serializer=basic__pb2.SumRequest.SerializeToString,
                 response_deserializer=basic__pb2.SumReply.FromString,
                 )
@@ -24,7 +24,7 @@ class SimpleActionsStub(object):
 class SimpleActionsServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def SayHello(self, request, context):
+    def AddNumbers(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,8 +33,8 @@ class SimpleActionsServicer(object):
 
 def add_SimpleActionsServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'SayHello': grpc.unary_unary_rpc_method_handler(
-                    servicer.SayHello,
+            'AddNumbers': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddNumbers,
                     request_deserializer=basic__pb2.SumRequest.FromString,
                     response_serializer=basic__pb2.SumReply.SerializeToString,
             ),
@@ -49,7 +49,7 @@ class SimpleActions(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def SayHello(request,
+    def AddNumbers(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,7 +59,7 @@ class SimpleActions(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/SimpleActions/SayHello',
+        return grpc.experimental.unary_unary(request, target, '/SimpleActions/AddNumbers',
             basic__pb2.SumRequest.SerializeToString,
             basic__pb2.SumReply.FromString,
             options, channel_credentials,

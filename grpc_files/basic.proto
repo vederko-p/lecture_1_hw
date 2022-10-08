@@ -2,7 +2,7 @@ syntax = "proto3";
 
 
 service SimpleActions {
-  rpc SayHello (SumRequest) returns (SumReply) {}
+  rpc AddNumbers (SumRequest) returns (SumReply) {}
 }
 
 
