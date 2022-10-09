@@ -140,4 +140,4 @@ PostgreSQL DBMS is considered a suitable solution for complex operations with la
 
 MySQL is well suited for small or medium-sized projects, however, it is assumed that the resource being created with articles will have a large number of visits and writing articles. In view of this, it makes sense to pay attention to more productive DBMSs.
 
-For this project choice of DBMS is based on this conference. The main point is PostgreSQL works great against the background of MongoDB and is an excellent option for using it as the main DBMS for the project.
+For this project choice of DBMS is based on [this conference](https://www.youtube.com/watch?v=SNzOZKvFZ68). The main point is PostgreSQL works great against the background of MongoDB and is an excellent option for using it as the main DBMS for the project.
