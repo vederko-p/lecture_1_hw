@@ -87,7 +87,7 @@ Business case is to make subscribe system for readers. They can subscribe to art
 
 This feature works only for users with active subscribe. See the "Check for subscribe status" above to see which user has active subscribe by default.
 
-To publish new article. visit the following route:
+To publish new article visit the following route:
 
     /publish_new_article
 
