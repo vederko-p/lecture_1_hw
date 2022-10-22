@@ -17,6 +17,12 @@ Go into grpc_files directory and execute the following command:
 
     python3 server.py
 
+**3. Start RabbitMQ**
+
+Go into root directory and execute the following command:
+
+    docker compose up
+
 ## 1. Business cases
 
 Users can view and add articles. When user tries to add article, he must pass originally level. Also the DB has to have free space for new articles.
@@ -60,10 +66,10 @@ To check if subscribe of a user is expired, visit the following:
     /check_subscribe/{user_id}
 
 Available users ids:
-* 0
-* 1
-* 2
-* 3
+* 0  (Active)
+* 1  (Expire)
+* 2  (Active)
+* 3  (Active)
 
 To extend subscrib for current user, visit the following:
 
@@ -74,6 +80,22 @@ To extend subscrib for current user, visit the following:
 To use gRPC route, visit the following:
 
     /check_grpc?n1=<int number>&n2=<int number>
+
+**Use RabbitMQ to check publications**
+
+Business case is to make subscribe system for readers. They can subscribe to articles and receive notifications about new publications.
+
+This feature works only for users with active subscribe. See the "Check for subscribe status" above to see which user has active subscribe by default.
+
+To publish new article. visit the following route:
+
+    /publish_new_article
+
+To check message for user, visit the following route:
+
+    /check_for_article?user_id=<int number>
+
+See the "Check for subscribe status" above to see available users id.
 
 ## 3. Tests
 
