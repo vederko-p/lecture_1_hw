@@ -112,7 +112,7 @@ async def publish_new_article():
     msg = 'New article has been published!'
     message = bytes(msg, encoding='utf8')
     channel.basic_publish(
-        exchange='new_article', routing_key='new_art_key', body=message
+        exchange='new_article', routing_key='', body=message
         )
     channel.close()
     return msg
@@ -128,3 +128,15 @@ async def check_for_article(user_id: int):
     else:
         msg = 'To see notifications about recently published articles update your subscribe!'
     return msg
+
+
+@router.get('/check_for_article_links')
+async def check_for_article_links():
+    connection = pika.BlockingConnection(pika_params)
+    channel = connection.channel()
+    _, _, msg = next(channel.consume('process_links'))
+    channel.close()
+    msg_add = 'Get request to update links base!'
+    msg = f'{msg}\n{msg_add}'
+    return msg
+
