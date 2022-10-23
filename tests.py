@@ -10,6 +10,8 @@ import grpc
 import app.grpc_files.basic_pb2 as basic_pb2
 import app.grpc_files.basic_pb2_grpc as basic_pb2_grpc
 
+import pika
+
 
 def test_check_bd():
     articles_bd = ArticlesDB(db_cont.articles_data)
@@ -79,3 +81,28 @@ def test_integration_grpc(var1, var2, expectation):
         message = basic_pb2.SumRequest(a=var1, b=var2)
         response = stub.AddNumbers(message)
     assert response.c == expectation
+
+
+consumer_message = 'New article has been published!'
+@pytest.mark.parametrize(
+    "queue_var, expected_msg",
+    [
+        ('new_article_queue', consumer_message),
+        ('process_links', consumer_message),
+    ])
+def test_integration_rabbitMQ_news_feed(queue_var, expected_msg):
+    # send message to consumers:
+    pika_params = pika.ConnectionParameters(host='localhost', port=5672)
+    connection = pika.BlockingConnection(pika_params)
+    channel = connection.channel()
+    msg = 'New article has been published!'
+    message = bytes(msg, encoding='utf8')
+    channel.basic_publish(
+        exchange='new_article', routing_key='', body=message
+        )
+    channel.close()
+    # check service message:
+    channel = connection.channel()
+    _, _, msg = next(channel.consume(queue_var))
+    channel.close()
+    assert msg.decode("utf-8")  == expected_msg
