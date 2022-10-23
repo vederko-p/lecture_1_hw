@@ -83,9 +83,9 @@ To use gRPC route, visit the following:
 
 **Use RabbitMQ to check publications**
 
-Business case is to make subscribe system for readers. They can subscribe to articles and receive notifications about new publications.
+Business case consists of two services: the first one is the news feed for readers and the second is links base. Both services react to a new published article. The goal of news feed is to show subscribed users announcements about recently published articles. The goal of the links base updater service is to update articles reference base.
 
-This feature works only for users with active subscribe. See the "Check for subscribe status" above to see which user has active subscribe by default.
+News fed works only for users with active subscribe. See the "Check for subscribe status" above to see which user has active subscribe by default.
 
 To publish new article visit the following route:
 
@@ -96,6 +96,10 @@ To check message for user, visit the following route:
     /check_for_article?user_id=<int number>
 
 See the "Check for subscribe status" above to see available users id.
+
+To see request to update links base, visit the following route:
+
+    /check_for_article_links
 
 ## 3. Tests
 
