@@ -129,7 +129,6 @@ async def check_for_article(user_id: int):
         msg = 'To see notifications about recently published articles update your subscribe!'
     return msg
 
-
 @router.get('/check_for_article_links')
 async def check_for_article_links():
     connection = pika.BlockingConnection(pika_params)
@@ -139,4 +138,3 @@ async def check_for_article_links():
     msg_add = 'Get request to update links base!'
     msg = f'{msg}\n{msg_add}'
     return msg
-
