@@ -2,6 +2,7 @@
 
 ## Launch instruction
 
+**1. Start web application**
 Clone the repository
 
 Install requirements
@@ -10,6 +11,11 @@ Execute the following command:
 
     uvicorn app.main:app
 
+**2. Start gRPC server**
+
+Go into grpc_files directory and execute the following command:
+
+    python3 server.py
 
 ## 1. Business cases
 
@@ -46,6 +52,28 @@ To add article, visit the following endpoint in docs:
     /articles/add
 
 Be attentive, your article must pass originality level. Besides, there may be no space in the database.
+
+**Check for subscribe status**
+
+To check if subscribe of a user is expired, visit the following:
+
+    /check_subscribe/{user_id}
+
+Available users ids:
+* 0
+* 1
+* 2
+* 3
+
+To extend subscrib for current user, visit the following:
+
+    /extend_subscribe/{user_id}
+
+**Use gRPC for sum evaluation**
+
+To use gRPC route, visit the following:
+
+    /check_grpc?n1=<int number>&n2=<int number>
 
 ## 3. Tests
 

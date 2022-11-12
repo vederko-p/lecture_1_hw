@@ -10,6 +10,10 @@ from app.utils import check_bd_free_space, check_originality
 
 import app.databases_content as db_cont
 
+import grpc
+import app.grpc_files.basic_pb2 as basic_pb2
+import app.grpc_files.basic_pb2_grpc as basic_pb2_grpc
+
 
 router = APIRouter()
 
@@ -26,7 +30,11 @@ async def read_root():
             '/articles/<str art_topic> (Web, IT, NN)',
             '/articles/<str art_topic>?number=<int number>',
             '/articles/add in docs',
-            '/cgeck_topic/{topic_name} in docs']
+            '/check_topic/{topic_name} in docs',
+            '/check_subscribe/{user_id}<int number>',
+            '/extend_subscribe/{user_id}<int number>',
+            '/check_grpc?n1=<int number>&n2=<int number>'
+            ]
         ]
     return content
 
@@ -80,3 +88,13 @@ async def get_certain_aricles(user_id: int):
 async def get_certain_aricles(user_id: int):
     report = subscribes_bd.extend_subscribe(user_id)
     return report
+
+
+@router.get('/check_grpc')
+async def get_certain_aricles(n1: int, n2: int):
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = basic_pb2_grpc.SimpleActionsStub(channel)
+        message = basic_pb2.SumRequest(a=n1, b=n2)
+        response = stub.AddNumbers(message)
+    res = {'result': response.c}
+    return res
