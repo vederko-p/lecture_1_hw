@@ -65,7 +65,7 @@ Available users ids:
 * 2
 * 3
 
-To extend subscrib for current user, visit the following:
+To extend subscribe for current user, visit the following:
 
     /extend_subscribe/{user_id}
 
@@ -84,3 +84,60 @@ Package name of the chosen testing module: PyTest.
 Go into root directory and run the following:
 
     pytest tests.py
+
+
+## 4. Data base business case
+
+The main goal of this project is to build articles website. Articlse can cover several domain fields. There is users - authors and readers. To publish articles you you need to subscribe. You can leave comments on articles. Thus, the project can contain both unstructured data, such as articles, and those that are better stored as structured – users and comments on articles. Lets overview some DBMSs for our needs.
+
+**MYSQL**
+
+Advantages:
+
+* easy to use
+* privacy levels
+* security
+
+Disadvantages:
+
+* limited functionality
+* paid support for all versions
+* insufficient reliability
+
+This DBMS is useful for some small-medium projects.
+
+**MongoDB**
+
+Advantages:
+
+* supports undefined data structures
+* designed for a large amount of data
+* works out of the box
+
+Disadvantages:
+
+* there are no simple transactions in the classic form
+* when adding a lot of data that depend on each other, there may be certain difficulties that you will have to solve yourself at the code level.
+* there is practically no data connectivity
+
+This DBMS is useful when you need flexibility with respect to documents
+
+**PostgreSQL**
+
+Advantages:
+
+* old, which means reliable in the context of finding information to solve possible problems both in the process of studying and in the process of using
+* supports unstructured data – JSON.
+* a productive Open Source community that supports its product well
+
+Disadvantages:
+
+* Requires study and configuration to use
+
+PostgreSQL DBMS is considered a suitable solution for complex operations with large amounts of data
+
+**Conclusion**
+
+MySQL is well suited for small or medium-sized projects, however, it is assumed that the resource being created with articles will have a large number of visits and writing articles. In view of this, it makes sense to pay attention to more productive DBMSs.
+
+For this project choice of DBMS is based on [this conference](https://www.youtube.com/watch?v=SNzOZKvFZ68). The main point is PostgreSQL works great against the background of MongoDB and is an excellent option for using it as the main DBMS for the project.
