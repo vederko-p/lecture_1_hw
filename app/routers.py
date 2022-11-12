@@ -1,4 +1,5 @@
 
+from sqlite3 import connect
 from fastapi import APIRouter
 
 from app.articles_base import ArticlesDB, Art
@@ -14,6 +15,10 @@ import grpc
 import app.grpc_files.basic_pb2 as basic_pb2
 import app.grpc_files.basic_pb2_grpc as basic_pb2_grpc
 
+import pika
+
+
+pika_params = pika.ConnectionParameters(host='localhost', port=5672)
 
 router = APIRouter()
 
@@ -98,3 +103,38 @@ async def get_certain_aricles(n1: int, n2: int):
         response = stub.AddNumbers(message)
     res = {'result': response.c}
     return res
+
+
+@router.get('/publish_new_article')
+async def publish_new_article():
+    connection = pika.BlockingConnection(pika_params)
+    channel = connection.channel()
+    msg = 'New article has been published!'
+    message = bytes(msg, encoding='utf8')
+    channel.basic_publish(
+        exchange='new_article', routing_key='', body=message
+        )
+    channel.close()
+    return msg
+
+@router.get('/check_for_article/{user_id}')
+async def check_for_article(user_id: int):
+    user_sub_status = subscribes_bd.check_user_subscribe_status(user_id)
+    if user_sub_status == 'Active':
+        connection = pika.BlockingConnection(pika_params)
+        channel = connection.channel()
+        _, _, msg = next(channel.consume('new_article_queue'))
+        channel.close()
+    else:
+        msg = 'To see notifications about recently published articles update your subscribe!'
+    return msg
+
+@router.get('/check_for_article_links')
+async def check_for_article_links():
+    connection = pika.BlockingConnection(pika_params)
+    channel = connection.channel()
+    _, _, msg = next(channel.consume('process_links'))
+    channel.close()
+    msg_add = 'Get request to update links base!'
+    msg = f'{msg}\n{msg_add}'
+    return msg
